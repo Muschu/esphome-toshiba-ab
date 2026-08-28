@@ -2080,8 +2080,10 @@ void ToshibaAbClimate::process_received_data_tu2c_(const struct DataFrame *frame
     }
     tcc_state.preheating = (payload[STATUS_DATA_FLAGS_BYTE] & 0b00000010) >> 1;
     tcc_state.filter_alert = (payload[STATUS_DATA_FLAGS_BYTE] & 0b10000000) >> 7;
-    if (payload_available > TU2C_STATUS_DATA_PRESET_BYTE) {
-      tcc_state.preset = payload[TU2C_STATUS_DATA_PRESET_BYTE];
+    const uint8_t preset_byte =
+        is_extended_status_frame ? TU2C_EXTENDED_STATUS_DATA_PRESET_BYTE : TU2C_STATUS_DATA_PRESET_BYTE;
+    if (payload_available > preset_byte) {
+      tcc_state.preset = payload[preset_byte];
     }
 
     ESP_LOGD(

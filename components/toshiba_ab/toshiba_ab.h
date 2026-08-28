@@ -63,7 +63,10 @@ const uint8_t STATUS_DATA_FAN_SHIFT_BITS = 5;
 const uint8_t STATUS_DATA_VENT_MASK = 0b00000100;
 const uint8_t STATUS_DATA_VENT_SHIFT_BITS = 2;
 const uint8_t STATUS_DATA_TARGET_TEMP_BYTE = 6;
+// TU2C's regular and extended status payloads place the preset at different
+// offsets. Extended status inserts room-temperature/status fields before it.
 const uint8_t TU2C_STATUS_DATA_PRESET_BYTE = 8;
+const uint8_t TU2C_EXTENDED_STATUS_DATA_PRESET_BYTE = 11;
 
 const uint8_t COMMAND_MODE_READ = 0x08;
 const uint8_t COMMAND_MODE_WRITE = 0x80;
